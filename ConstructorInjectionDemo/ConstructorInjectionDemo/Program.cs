@@ -15,7 +15,7 @@ namespace ConstructorInjectionDemo
 
             do
             {
-                System.Console.WriteLine( "Please enter number of passengers" );
+                System.Console.Write( "Please enter number of passengers : " );
                 passengerInput = Console.ReadLine();
                 Console.WriteLine( "\n" );
 
@@ -23,7 +23,7 @@ namespace ConstructorInjectionDemo
 
             DecideVehicle( numberOfPassengers );
 
-            Console.WriteLine( "Press any key to exit." );
+            Console.WriteLine( "\nPress any key to exit." );
             Console.ReadKey();
 
         }
@@ -42,12 +42,12 @@ namespace ConstructorInjectionDemo
                 var avendator = new Avendator();
                 driver = new Driver( avendator );
             }
-            else if (numberOfPassengers == 1)
+            else if (numberOfPassengers > 1 && numberOfPassengers < 5)
             {
                 var civic = new Civic();
                 driver = new Driver( civic );
             }
-            else if (numberOfPassengers == 1)
+            else if (numberOfPassengers > 5 && numberOfPassengers <= 8)
             {
                 var sienna = new Sienna();
                 driver = new Driver( sienna );
@@ -57,6 +57,7 @@ namespace ConstructorInjectionDemo
                 Console.WriteLine( "Too many passengers." );
                 return;
             }
+            driver.Drive( numberOfPassengers );
         }
     }
 
@@ -68,6 +69,11 @@ namespace ConstructorInjectionDemo
         public Driver( ICar car )
         {
             _car = car;
+        }
+
+        public void Drive( int numberOfPassengers )
+        {
+            _car.Drive( numberOfPassengers );
         }
     }
 
@@ -84,7 +90,7 @@ namespace ConstructorInjectionDemo
     {
         public void Drive( int numberOfPassengers )
         {
-            Console.WriteLine( "Driving a an Honda Civic Avendator with {0} passegers.",
+            Console.WriteLine( "Driving a an Honda Civic with {0} passegers.",
                     numberOfPassengers );
         }
     }
